@@ -20,10 +20,12 @@ struct ContentView: View {
           text: $newWord,
           onCommit: addNewWord
         )
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .padding()
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .padding()
+        .autocapitalization(.none)
 
         List(usedWords, id: \.self) {
+          Image(systemName: "\($0.count).circle")
           Text($0)
         }
       }
