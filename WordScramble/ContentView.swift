@@ -32,6 +32,12 @@ struct ContentView: View {
           Text($0)
         }
       }
+      .navigationBarItems(
+        trailing: Button(
+          "New Game",
+          action: startGame
+        )
+      )
       .navigationBarTitle(rootWord)
       .onAppear(perform: startGame)
       .alert(isPresented: $showingError) {
@@ -103,7 +109,7 @@ struct ContentView: View {
     if word.count < 3 || word == rootWord {
       return false
     }
-    
+
     let checker = UITextChecker()
     let range = NSRange(location: 0, length: word.utf16.count)
     let misspelledRange = checker.rangeOfMisspelledWord(
