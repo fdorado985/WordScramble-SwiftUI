@@ -52,6 +52,10 @@ struct ContentView: View {
       }
     }
   }
+
+  func isOriginal(word: String) -> Bool {
+    !usedWords.contains(word)
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
