@@ -15,15 +15,30 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       VStack {
-        TextField("Enter your word", text: $newWord)
+        TextField(
+          "Enter your word",
+          text: $newWord,
+          onCommit: addNewWord
+        )
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding()
+
         List(usedWords, id: \.self) {
           Text($0)
         }
       }
       .navigationBarTitle(rootWord)
     }
+  }
+
+  func addNewWord() {
+    let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !answer.isEmpty else {
+      return
+    }
+
+    usedWords.insert(answer, at: 0)
+    newWord = ""
   }
 }
 
