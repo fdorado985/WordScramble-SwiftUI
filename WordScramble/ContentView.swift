@@ -14,6 +14,14 @@ struct ContentView: View {
   @State private var errorTitle = ""
   @State private var errorMessage = ""
   @State private var showingError = false
+  private var score: Int {
+    guard let numOfCharacters = usedWords.first?.count else {
+      return 0
+    }
+
+    let additionalScore = floor(Double(usedWords.count) * 0.75)
+    return numOfCharacters + Int(additionalScore)
+  }
 
   var body: some View {
     NavigationView {
@@ -31,6 +39,8 @@ struct ContentView: View {
           Image(systemName: "\($0.count).circle")
           Text($0)
         }
+
+        Text("Score: \(score)")
       }
       .navigationBarItems(
         trailing: Button(
